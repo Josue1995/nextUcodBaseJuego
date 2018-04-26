@@ -1,4 +1,8 @@
+var score = $("#score-text").text();
+score = parseInt(score);
+
 $(document).ready(function(){
+
   function title() {
     var t = $("h1[class = main-titulo]");
     t.animate( {color : "White"}, 1500,'swing');
@@ -58,12 +62,37 @@ $(document).ready(function(){
 
   function ocultarH() {
     var h = $(".imagenes");
+    var op;
     for (var i = 7; i <= h.length-7; i++) {
       if( $(h[i]).attr("src") == $(h[i+7]).attr("src") ){
         if( $(h[i]).attr("src") == $(h[i-7]).attr("src") ){
           $(h[i-7]).fadeOut(5000, 'swing');
           $(h[i+7]).fadeOut(5000, 'swing');
           $(h[i]).fadeOut(5000, 'swing' );
+          //sumar puntos al marcador
+          op = $(h[i]).attr("src");
+          switch (op) {
+            case "image/1.png":
+              score = score + 5;
+              score = score.toString();
+              $("#score-text").text(score);
+              break;
+            case "image/2.png":
+              score = score + 10;
+              score = score.toString();
+              $("#score-text").text(score);
+              break;
+            case "image/3.png":
+              score = score + 15;
+              score = score.toString();
+              $("#score-text").text(score);
+              break;
+            case "image/4.png":
+              score = score + 20;
+              score = score.toString();
+              $("#score-text").text(score);
+              break;
+          }
         }
       }
     }
