@@ -102,6 +102,17 @@ $(document).ready(function(){
     setTimeout(function() { ocultarH(); }, 300);
   }
 
+  function terminar() {
+        var t = $("#timer").text();
+        if(t == "0:00"){
+          var b = $("body"), mov = $(".moves"), pan = $(".panel-score"), tm = $(".time"), tb = $(".panel-tablero");
+          $(b[0]).css("background-image", "url('image/madera.jpg')");
+          $(tm[0]).css("display", "none");
+          $(tb[0]).css("display", "none");
+        }
+
+  }
+
   function temporizador() {
       var cuenta, i = 59, j = 1; cont= 0;
       var t = $("#timer"), cuentaRegresiva = new Timer();
@@ -121,6 +132,7 @@ $(document).ready(function(){
 
         if(cuentaRegresiva.ticks() == 120){
           cuentaRegresiva.stop();
+          terminar();
         }
       });
 
@@ -162,8 +174,10 @@ $(document).ready(function(){
       ocultarH();
       Drag();
       drop();
+
     });
   }
+
 
   title();
   dulces();
