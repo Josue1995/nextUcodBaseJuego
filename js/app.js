@@ -1,6 +1,5 @@
 var score = $("#score-text").text();
 score = parseInt(score);
-
 $(document).ready(function(){
 
   function title() {
@@ -76,21 +75,25 @@ $(document).ready(function(){
               score = score + 5;
               score = score.toString();
               $("#score-text").text(score);
+              score = parseInt(score);
               break;
             case "image/2.png":
               score = score + 10;
               score = score.toString();
               $("#score-text").text(score);
+              score = parseInt(score);
               break;
             case "image/3.png":
               score = score + 15;
               score = score.toString();
               $("#score-text").text(score);
+              score = parseInt(score);
               break;
             case "image/4.png":
               score = score + 20;
               score = score.toString();
               $("#score-text").text(score);
+              score = parseInt(score);
               break;
           }
         }
