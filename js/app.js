@@ -107,8 +107,8 @@ $(document).ready(function(){
         if(t == "0:00"){
           var b = $("body"), mov = $(".moves"), pan = $(".panel-score"), tm = $(".time"), tb = $(".panel-tablero");
           $(b[0]).css("background-image", "url('image/madera.jpg')");
-          $(tm[0]).css("display", "none");
-          $(tb[0]).css("display", "none");
+          $(tm[0]).slideUp(3000, 'linear');
+          $(tb[0]).slideUp(3000, 'linear');
         }
 
   }
@@ -143,23 +143,21 @@ $(document).ready(function(){
 
   function Drag() {
     var dulces = $(".imagenes");
-    var dragDistance = 100;
     for (var i = 0; i < dulces.length; i++) {
       $(dulces[i]).draggable({
-        drag: function (event, ui) {
-
-        }
+        revert : "invalid",
       });
     }
   }
 
   function drop() {
-    var dulces = $(".imagenes");
-    for (var i = 0; i < dulces.length; i++) {
-      $(dulces[i]).droppable({
-        accept : ".imagenes"
+    var columnas = $("div[class *= col]");
+    for (var i = 0; i < columnas.length; i++) {
+      $(columnas[i]).droppable({
+        accept: ".imagenes"
       });
     }
+
   }
 
   function iniciar() {
