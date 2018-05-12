@@ -1,5 +1,6 @@
 var score = $("#score-text").text();
 score = parseInt(score);
+var j = 1, t = $("#timer");
 $(document).ready(function(){
 
   function title() {
@@ -113,28 +114,65 @@ $(document).ready(function(){
 
   }
 
-  function temporizador() {
-      var cuenta, i = 59, j = 1; cont= 0;
-      var t = $("#timer"), cuentaRegresiva = new Timer();
+  function temporizadorF() {
+    var cuentaFinal = newTimer();
+    var k = 9;
+    cuentaFinal.every('1 seconds', function () {
+      $(t).text("0" + j + ":" + "0" + k);
+      if (k == 0) {
+        cuentaFinal.stop();
+        terminar();
+      }
+      k--;
+
+    });
+    cuentaFinal.start();
+  }
+
+  function temporizadorT() {
+    var cuentaTernaria = new Timer();
+    var z = 59;
+    j--;
+    cuentaTernaria.every('1 seconds', function () {
+      $(t).text("0" + j + ":" + z);
+      if (z == 10) {
+        cuentaTernaria.stop();
+        temporizadorF();
+      }
+      z--;
+
+    });
+    cuentaTernaria.start();
+  }
+
+  function temporizadorS() {
+    var cuentaSecundaria = new Timer();
+    var k = 9;
+    cuentaSecundaria.every('1 seconds', function () {
+      $(t).text("0" + j + ":" + "0" + k);
+      if (k == 0) {
+        cuentaSecundaria.stop();
+        temporizadorT();
+      }
+      k--;
+
+    });
+    cuentaSecundaria.start();
+  }
+
+
+  function temporizadorP() {
+      var cuenta, i = 59, cont= 0;
+      var cuentaRegresiva = new Timer();
       cuentaRegresiva.every('1 seconds', function () {
-        $(t).text(j + ":" + i);
-        i--;
-        if(i==0){
-          j=0;
-          i=60;
-          cont++;
-          if(cont==2){
-            i="00";
-          }
-
-          }
-
-
-        if(cuentaRegresiva.ticks() == 120){
+        $(t).text("0" + j + ":" + i);
+        if(i==10){
           cuentaRegresiva.stop();
-          terminar();
+          temporizadorS();
         }
+        i--;
       });
+
 
 
       cuentaRegresiva.start();
@@ -145,8 +183,11 @@ $(document).ready(function(){
     var dulces = $(".imagenes");
     for (var i = 0; i < dulces.length; i++) {
       $(dulces[i]).draggable({
-        revert : "invalid",
+        axis: "x",
+        containment: "parent",
+
       });
+
     }
   }
 
@@ -167,7 +208,7 @@ $(document).ready(function(){
         location.reload(true);
       }
       $(boton).text("Reiniciar");
-      temporizador();
+      temporizadorP();
       ocultar();
       ocultarH();
       Drag();
