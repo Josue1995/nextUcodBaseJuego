@@ -105,17 +105,41 @@ $(document).ready(function(){
 
   function terminar() {
         var t = $("#timer").text();
-        if(t == "0:00"){
-          var b = $("body"), mov = $(".moves"), pan = $(".panel-score"), tm = $(".time"), tb = $(".panel-tablero");
-          $(b[0]).css("background-image", "url('image/madera.jpg')");
-          $(tm[0]).slideUp(3000, 'linear');
-          $(tb[0]).slideUp(3000, 'linear');
+        if(t == "00:00"){
+          var mov = $(".moves"), pan = $(".panel-score"), tm = $(".time"), tb = $(".panel-tablero");
+          $(tb[0]).animate(
+            {
+              width: "0%",
+              height: "0%"
+            }, 3000, 'linear', function () {
+              $(tb[0]).detach();
+            }
+          );
+
+          $(pan[0]).animate(
+            {
+              width: "100%"
+            }, 3000, 'linear'
+          );
+
+          $(mov[0]).animate(
+            {
+              width: "100%"
+            }, 3000, 'linear'
+          );
+
+          $(tm).animate(
+            {
+              width: "100%"
+            }, 3000, 'linear'
+          );
+
         }
 
   }
 
   function temporizadorF() {
-    var cuentaFinal = newTimer();
+    var cuentaFinal = new Timer();
     var k = 9;
     cuentaFinal.every('1 seconds', function () {
       $(t).text("0" + j + ":" + "0" + k);
